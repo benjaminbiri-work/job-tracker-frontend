@@ -14,11 +14,15 @@ export default function BidderApplyPage() {
   const [open, setOpen] = useState(false);
 
   async function load() {
-    const res = await api(`/bidder/profiles/${profileId}/apply-data?q=${encodeURIComponent(query)}`);
+    const res = await api(
+      `/bidder/profiles/${profileId}/apply-data?q=${encodeURIComponent(query)}`,
+    );
     setData(res);
   }
 
-  useEffect(() => { load(); }, [profileId, query]);
+  useEffect(() => {
+    load();
+  }, [profileId, query]);
 
   if (!data) return <Loader text="Loading apply page..." />;
 
@@ -33,7 +37,16 @@ export default function BidderApplyPage() {
       <PageHeader
         title={`Apply - ${data.profile.name}`}
         subtitle="Total applies today, previous applies, and this week's scheduled interviews."
-        action={<button onClick={() => { setEditing(null); setOpen(true); }}>Add job link</button>}
+        action={
+          <button
+            onClick={() => {
+              setEditing(null);
+              setOpen(true);
+            }}
+          >
+            Add job link
+          </button>
+        }
       />
 
       <ApplyFormModal
@@ -45,36 +58,69 @@ export default function BidderApplyPage() {
       />
 
       <div className="stats-grid">
-        <div className="stat-card"><div className="stat-title">Applies Today</div><div className="stat-value">{data.stats.today_applies}</div></div>
-        <div className="stat-card"><div className="stat-title">Total Applies</div><div className="stat-value">{data.stats.total_applies}</div></div>
-        <div className="stat-card"><div className="stat-title">This Week Scheduled Interviews</div><div className="stat-value">{data.stats.this_week_interviews}</div></div>
+        <div className="stat-card">
+          <div className="stat-title">Applies Today</div>
+          <div className="stat-value">{data.stats.today_applies}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-title">Total Applies</div>
+          <div className="stat-value">{data.stats.total_applies}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-title">This Week Scheduled Interviews</div>
+          <div className="stat-value">{data.stats.this_week_interviews}</div>
+        </div>
       </div>
 
       <div className="panel">
-        <input placeholder="Search by company name, job title, or job link" value={query} onChange={(e) => setQuery(e.target.value)} />
+        <input
+          placeholder="Search by company name, job title, or job link"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
       </div>
 
-      <div className="two-panels">
-        <div className="panel">
-          <h2>Previous applies</h2>
-          <table className="table">
-            <thead><tr><th>Company</th><th>Job title</th><th>Link</th><th>Created</th><th>Actions</th></tr></thead>
-            <tbody>
-              {data.applies.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.company_name}</td>
-                  <td>{row.job_title}</td>
-                  <td><a href={row.job_site_url} target="_blank" rel="noreferrer">Open</a></td>
-                  <td>{new Date(row.created_at).toLocaleString()}</td>
-                  <td className="actions-row">
-                    <button className="ghost" onClick={() => { setEditing(row); setOpen(true); }}>Edit</button>
-                    <button className="danger-btn" onClick={() => remove(row.id)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div className="panel">
+        <h2>Previous applies</h2>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Job title</th>
+              <th>Link</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.applies.map((row) => (
+              <tr key={row.id}>
+                <td>{row.company_name}</td>
+                <td>{row.job_title}</td>
+                <td>
+                  <a href={row.job_site_url} target="_blank" rel="noreferrer">
+                    Open
+                  </a>
+                </td>
+                <td>{new Date(row.created_at).toLocaleString()}</td>
+                <td className="actions-row">
+                  <button
+                    className="ghost"
+                    onClick={() => {
+                      setEditing(row);
+                      setOpen(true);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button className="danger-btn" onClick={() => remove(row.id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
