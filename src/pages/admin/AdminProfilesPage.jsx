@@ -56,7 +56,7 @@ export default function AdminProfilesPage() {
               <tr key={p.id}>
                 <td><Link className="inline-link" to={`/admin/applies/profile/${p.id}`}>{p.name}</Link></td>
                 <td>{p.email || "-"}</td>
-                <td>{p.linkedin_url ? <a href={p.linkedin_url} target="_blank" rel="noreferrer">Open</a> : "-"}</td>
+                <td>{p.linkedin_url ? <a className="inline-link" href={p.linkedin_url} target="_blank" rel="noreferrer">Open</a> : "-"}</td>
                 <td>{p.location || "-"}</td>
                 <td>{p.birthday ? String(p.birthday).slice(0, 10) : "-"}</td>
                 <td>{p.phone_number || "-"}</td>

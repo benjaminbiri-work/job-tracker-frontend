@@ -60,7 +60,7 @@ export default function AdminAppliesProfilePage() {
               <tr key={row.id}>
                 <td>{row.company_name}</td>
                 <td>{row.job_title}</td>
-                <td><a href={row.job_site_url} target="_blank" rel="noreferrer">Open</a></td>
+                <td><a className="inline-link" href={row.job_site_url} target="_blank" rel="noreferrer">Open</a></td>
                 <td>{new Date(row.created_at).toLocaleString()}</td>
                 <td className="actions-row">
                   <button className="ghost" onClick={() => { setEditing(row); setOpen(true); }}>Edit</button>
