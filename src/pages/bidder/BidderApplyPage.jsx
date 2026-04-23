@@ -47,7 +47,7 @@ export default function BidderApplyPage() {
       <div className="stats-grid">
         <div className="stat-card"><div className="stat-title">Applies Today</div><div className="stat-value">{data.stats.today_applies}</div></div>
         <div className="stat-card"><div className="stat-title">Total Applies</div><div className="stat-value">{data.stats.total_applies}</div></div>
-        <div className="stat-card"><div className="stat-title">This Week Interviews</div><div className="stat-value">{data.stats.this_week_interviews}</div></div>
+        <div className="stat-card"><div className="stat-title">This Week Scheduled Interviews</div><div className="stat-value">{data.stats.this_week_interviews}</div></div>
       </div>
 
       <div className="panel">
@@ -70,25 +70,6 @@ export default function BidderApplyPage() {
                     <button className="ghost" onClick={() => { setEditing(row); setOpen(true); }}>Edit</button>
                     <button className="danger-btn" onClick={() => remove(row.id)}>Delete</button>
                   </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="panel">
-          <h2>Scheduled interviews this week</h2>
-          <table className="table">
-            <thead><tr><th>Company</th><th>Current step</th><th>Processes</th><th>Due date</th></tr></thead>
-            <tbody>
-              {data.interviews.length === 0 ? (
-                <tr><td colSpan="4">No interviews this week.</td></tr>
-              ) : data.interviews.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.company}</td>
-                  <td><Tag tone="green">{row.current_step || "-"}</Tag></td>
-                  <td><div className="tag-wrap">{(row.processes || []).map((p) => <Tag key={p} tone="pink">{p}</Tag>)}</div></td>
-                  <td>{row.due_date ? String(row.due_date).slice(0, 10) : "-"}</td>
                 </tr>
               ))}
             </tbody>
