@@ -96,12 +96,12 @@ export default function BidderApplyPage() {
       <div className="stats-grid">
         <div className="stat-card">
           <div className="stat-title">Today Applies</div>
-          <div className="stat-value">{data.stats.today}</div>
+          <div className="stat-value">{data.stats.today_applies}</div>
         </div>
 
         <div className="stat-card">
           <div className="stat-title">Total Applies</div>
-          <div className="stat-value">{data.stats.total}</div>
+          <div className="stat-value">{data.stats.total_applies}</div>
         </div>
 
         <div className="stat-card">
