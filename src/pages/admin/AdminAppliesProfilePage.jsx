@@ -6,7 +6,7 @@ import { api } from "../../api/client";
 import Loader from "../../components/Loader";
 import PageHeader from "../../components/PageHeader";
 import ApplyFormModal from "../../components/forms/ApplyFormModal";
-import { FaBackward, FaForward } from "react-icons/fa";
+import { FaBackward, FaEdit, FaForward, FaTrash } from "react-icons/fa";
 
 export default function AdminAppliesProfilePage() {
   const { profileId } = useParams();
@@ -179,14 +179,14 @@ export default function AdminAppliesProfilePage() {
                         setOpen(true);
                       }}
                     >
-                      Edit
+                      <FaEdit size={14} />
                     </button>
 
                     <button
                       className="danger-btn"
                       onClick={() => removeApply(row.id)}
                     >
-                      Delete
+                      <FaTrash size={14} />
                     </button>
                   </td>
                 </tr>
