@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../api/client";
 import Loader from "../../components/Loader";
 import PageHeader from "../../components/PageHeader";
+import { FaTrash } from "react-icons/fa";
 
 export default function AdminBiddersPage() {
   const [rows, setRows] = useState(null);
@@ -11,14 +12,16 @@ export default function AdminBiddersPage() {
     setRows(res.bidders);
   }
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   if (!rows) return <Loader text="Loading bidders..." />;
 
   async function toggleApproval(id, approved) {
     await api(`/admin/bidders/${id}/approval`, {
       method: "PUT",
-      body: JSON.stringify({ approved: !approved })
+      body: JSON.stringify({ approved: !approved }),
     });
     await load();
   }
@@ -26,17 +29,29 @@ export default function AdminBiddersPage() {
   async function toggleActive(id, is_active) {
     await api(`/admin/bidders/${id}/active`, {
       method: "PUT",
-      body: JSON.stringify({ is_active: !is_active })
+      body: JSON.stringify({ is_active: !is_active }),
     });
     await load();
   }
 
   return (
     <div className="page-grid">
-      <PageHeader title="Bidders" subtitle="Approve inactive accounts and activate/deactivate bidders." />
+      <PageHeader
+        title="Bidders"
+        subtitle="Approve inactive accounts and activate/deactivate bidders."
+      />
       <div className="panel">
         <table className="table">
-          <thead><tr><th>Name</th><th>Email</th><th>Approved</th><th>Active</th><th>Online</th><th>Actions</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Approved</th>
+              <th>Active</th>
+              <th>Online</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
           <tbody>
             {rows.map((row) => (
               <tr key={row.id}>
@@ -46,8 +61,32 @@ export default function AdminBiddersPage() {
                 <td>{row.is_active ? "Yes" : "No"}</td>
                 <td>{row.online ? "Online" : "Offline"}</td>
                 <td className="actions-row">
-                  <button className="ghost" onClick={() => toggleApproval(row.id, row.approved)}>{row.approved ? "Revoke" : "Approve"}</button>
-                  <button className={row.is_active ? "danger-btn" : ""} onClick={() => toggleActive(row.id, row.is_active)}>{row.is_active ? "Deactivate" : "Activate"}</button>
+                  <button
+                    className="ghost"
+                    onClick={() => toggleApproval(row.id, row.approved)}
+                  >
+                    {row.approved ? "Revoke" : "Approve"}
+                  </button>
+                  <button
+                    className={row.is_active ? "danger-btn" : ""}
+                    onClick={() => toggleActive(row.id, row.is_active)}
+                  >
+                    {row.is_active ? "Deactivate" : "Activate"}
+                  </button>
+                  <button
+                    className="danger-btn"
+                    onClick={async () => {
+                      if (!confirm("Delete this bidder?")) return;
+
+                      await api(`/admin/bidders/${row.id}`, {
+                        method: "DELETE",
+                      });
+
+                      load();
+                    }}
+                  >
+                    <FaTrash size={14} />
+                  </button>
                 </td>
               </tr>
             ))}
