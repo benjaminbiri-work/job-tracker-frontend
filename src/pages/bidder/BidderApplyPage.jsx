@@ -185,7 +185,7 @@ export default function BidderApplyPage() {
                   <td>{row.job_title}</td>
                   <td>
                     <a
-                      className="inline-link"
+                      className="underline-link"
                       href={row.job_site_url}
                       target="_blank"
                       rel="noreferrer"

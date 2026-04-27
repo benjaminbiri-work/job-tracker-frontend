@@ -195,6 +195,10 @@ button.danger-btn {
 .inline-link {
   color: #60a5fa;
 }
+.underline-link {
+  color: #60a5fa;
+  text-decoration: underline;
+}
 .auth-page,
 .loader-wrap.fullscreen {
   min-height: 100vh;
