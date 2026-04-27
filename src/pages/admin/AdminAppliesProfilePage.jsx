@@ -163,6 +163,7 @@ export default function AdminAppliesProfilePage() {
                   <td>{row.job_title}</td>
                   <td>
                     <a
+                      className="inline-link"
                       href={row.job_site_url}
                       target="_blank"
                       rel="noreferrer"
