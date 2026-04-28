@@ -21,6 +21,11 @@ export default function AdminInterviewsPage() {
     setProfiles(pr.profiles);
   }
 
+  function truncate(text, max = 60) {
+    if (!text) return "-";
+    return text.length > max ? text.slice(0, max) + "..." : text;
+  }
+  
   useEffect(() => {
     load();
   }, []);
@@ -102,7 +107,9 @@ export default function AdminInterviewsPage() {
                       ))}
                     </div>
                   </td>
-                  <td>{row.additional_info || "-"}</td>
+                  <td title={row.additional_info}>
+                    {truncate(row.additional_info, 60)}
+                  </td>
                   <td>{row.assigned_user_name || "-"}</td>
                   <td>
                     {row.due_date ? String(row.due_date).slice(0, 10) : "-"}
