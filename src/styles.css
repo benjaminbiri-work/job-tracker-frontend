@@ -375,3 +375,45 @@ label {
 .filter-row input {
   max-width: 220px;
 }
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.interviews-table {
+  width: 100%;
+  min-width: 1100px; /* keeps columns readable */
+  border-collapse: collapse;
+}
+
+.interviews-table th,
+.interviews-table td {
+  padding: 10px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.interviews-table th {
+  white-space: nowrap;
+}
+
+.interviews-table td {
+  word-break: break-word;
+}
+
+/* long content cells */
+.cell-truncate {
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* actions buttons wrap nicely */
+.actions-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}

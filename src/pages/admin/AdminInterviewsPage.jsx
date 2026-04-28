@@ -64,8 +64,8 @@ export default function AdminInterviewsPage() {
       />
 
       <div className="panel dark-panel">
-        <div className="table-scroll">
-          <table className="table interview-table">
+        <div className="table-responsive">
+          <table className="table interviews-table">
             <thead>
               <tr>
                 <th>Profile</th>
