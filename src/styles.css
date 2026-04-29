@@ -417,3 +417,25 @@ label {
   gap: 8px;
   flex-wrap: wrap;
 }
+
+.inline-row{
+  display:flex;
+  gap:8px;
+}
+
+.inline-row button{
+  white-space:nowrap;
+}
+
+.check-box{
+  margin-top:8px;
+  padding:10px;
+  background:#f8fafc;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+}
+
+.mini-item{
+  padding:6px 0;
+  border-bottom:1px solid #eee;
+}
